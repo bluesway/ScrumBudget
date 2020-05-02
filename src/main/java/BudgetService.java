@@ -13,7 +13,7 @@ public class BudgetService {
         this.budgetRepo = budgetRepo;
     }
 
-    private Map<YearMonth,Integer> getBudgetTable(){
+    private Map<YearMonth,Integer> getDailyBudgetByMonthTable(){
         Map<YearMonth,Integer> result = new HashMap<>();
         List<Budget> budgets = budgetRepo.getAll();
         DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyyMM");
@@ -28,19 +28,15 @@ public class BudgetService {
     public int query(LocalDate dateFrom, LocalDate dateTo) {
 
 
-
-        Map<YearMonth, Integer> dayListTable = getBudgetTable();
-        Map<YearMonth, Long> dayList = DateUtil.getDateList(dateFrom,dateTo);
+        Map<YearMonth, Integer> dailyBudgetByMonthTable = getDailyBudgetByMonthTable();
+        Map<YearMonth, Long> daysByMonthTable = DateUtil.getDateList(dateFrom,dateTo);
 
         long totalBudget = 0L;
 
-        for (Map.Entry day : dayList.entrySet() ){
-            day.getKey();
-            day.getValue();
-
-            totalBudget += dayListTable.get(day.getKey()) * (long)day.getValue();
+        for (Map.Entry daysByMonth : daysByMonthTable.entrySet() ){
+            totalBudget += dailyBudgetByMonthTable.get(daysByMonth.getKey()) * (long)daysByMonth.getValue();
         }
-        return (int)(totalBudget);
+        return (int)totalBudget;
     }
 
 }
