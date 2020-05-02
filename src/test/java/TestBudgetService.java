@@ -18,7 +18,8 @@ public class TestBudgetService {
     public void sameDay(){
         BudgetService budgetService = new BudgetService();
 
-        when(budgetRepo.getAll()).thenReturn(Arrays.asList(new Budget()));
+
+        when(budgetRepo.getAll()).thenReturn();
 
         budgetService.query(LocalDate.of(2020, 04, 01),
                             LocalDate.of(2020, 04, 01));
