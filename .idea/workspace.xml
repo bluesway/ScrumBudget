@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c305a14f-5451-4b13-957a-6b97ad6081bf" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/TestBudgetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TestBudgetService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/BudgetService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/BudgetService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +76,33 @@
       <recent name="$PROJECT_DIR$/src/main" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration name="TestBudgetService" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;TestBudgetService&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":cleanTest" />
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.TestBudgetService" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -107,9 +121,25 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="429" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588409609845">
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom" timestamp="1588410326299">
       <screen x="0" y="0" width="1280" height="735" />
     </state>
-    <state x="429" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.735@0.0.1280.735" timestamp="1588409609845" />
+    <state width="1238" height="212" key="GridCell.Tab.0.bottom/0.0.1280.735@0.0.1280.735" timestamp="1588410326299" />
+    <state width="1238" height="212" key="GridCell.Tab.0.center" timestamp="1588410326297">
+      <screen x="0" y="0" width="1280" height="735" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.center/0.0.1280.735@0.0.1280.735" timestamp="1588410326297" />
+    <state width="1238" height="212" key="GridCell.Tab.0.left" timestamp="1588410326296">
+      <screen x="0" y="0" width="1280" height="735" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.left/0.0.1280.735@0.0.1280.735" timestamp="1588410326296" />
+    <state width="1238" height="212" key="GridCell.Tab.0.right" timestamp="1588410326298">
+      <screen x="0" y="0" width="1280" height="735" />
+    </state>
+    <state width="1238" height="212" key="GridCell.Tab.0.right/0.0.1280.735@0.0.1280.735" timestamp="1588410326298" />
+    <state x="429" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1588410390896">
+      <screen x="0" y="0" width="1280" height="735" />
+    </state>
+    <state x="429" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1280.735@0.0.1280.735" timestamp="1588410390896" />
   </component>
 </project>

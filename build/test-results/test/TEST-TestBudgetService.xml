@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="TestBudgetService" tests="3" skipped="1" failures="0" errors="0" timestamp="2020-05-02T09:14:00" hostname="pc80.wireless4.tku.edu.tw" time="10.578">
+  <properties/>
+  <testcase name="startDayGrtEndDay" classname="TestBudgetService" time="0.073"/>
+  <testcase name="crossTwoMonth" classname="TestBudgetService" time="5.42"/>
+  <testcase name="sameMonth" classname="TestBudgetService" time="5.083">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

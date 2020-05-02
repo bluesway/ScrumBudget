@@ -1,3 +1,5 @@
+import utils.DateUtil;
+
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -14,29 +16,31 @@ public class BudgetService {
     private Map<YearMonth,Integer> getBudgetTable(){
         Map<YearMonth,Integer> result = new HashMap<>();
         List<Budget> budgets = budgetRepo.getAll();
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("uuuuM");
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyyMM");
         for (Budget budget: budgets){
-            result.put(YearMonth.parse(budget.YearMonth,f),budget.amount);
+
+            YearMonth month = YearMonth.parse(budget.YearMonth,f);
+            result.put(month,budget.amount/month.lengthOfMonth());
         }
         return result;
     }
 
-    public void query(LocalDate dateFrom, LocalDate dateTo) {
-
-//        int monthBudgetFrom = getMontheBudget(dateFrom);
-//        int monthBudgetTo = getMontheBudget(dateTo);
+    public int query(LocalDate dateFrom, LocalDate dateTo) {
 
 
-        Map<YearMonth, Integer> dayListTale = getBudgetTable();
-        Map<YearMonth, Integer> dayList = getDayList();
 
-        Double totalBudget = 0.0;
+        Map<YearMonth, Integer> dayListTable = getBudgetTable();
+        Map<YearMonth, Long> dayList = DateUtil.getDateList(dateFrom,dateTo);
 
-        if (dateFrom.lengthOfMonth() == dayList.get("")){
-            totalBudget = totalBudget + monthBudgetFrom;
-        }else{
-            totalBudget = totalBudget + (monthBudgetFrom/dayList.get())
+        long totalBudget = 0L;
+
+        for (Map.Entry day : dayList.entrySet() ){
+            day.getKey();
+            day.getValue();
+
+            totalBudget += dayListTable.get(day.getKey()) * (long)day.getValue();
         }
+        return (int)(totalBudget);
     }
 
 }
