@@ -87,6 +87,4 @@ public class TestBudgetService {
                 LocalDate.of(2020, 02, 15));
         Assert.assertEquals(0, result);
     }
-
-
 }

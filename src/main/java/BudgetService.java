@@ -18,16 +18,13 @@ public class BudgetService {
         List<Budget> budgets = budgetRepo.getAll();
         DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyyMM");
         for (Budget budget: budgets){
-
             YearMonth month = YearMonth.parse(budget.YearMonth,f);
-            result.put(month,budget.amount/month.lengthOfMonth());
+            result.put(month, budget.amount/month.lengthOfMonth());
         }
         return result;
     }
 
     public int query(LocalDate dateFrom, LocalDate dateTo) {
-
-
         Map<YearMonth, Integer> dailyBudgetByMonthTable = getDailyBudgetByMonthTable();
         Map<YearMonth, Long> daysByMonthTable = DateUtil.getDateList(dateFrom,dateTo);
 
