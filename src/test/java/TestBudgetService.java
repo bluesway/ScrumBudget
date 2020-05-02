@@ -45,7 +45,7 @@ public class TestBudgetService {
 
     @Test
     public void sameDay(){
-        normalMock()
+        normalMock();
         int result = budgetService.query(LocalDate.of(2020, 04, 01),
                             LocalDate.of(2020, 04, 01));
         Assert.assertEquals(10, result);
