@@ -5,6 +5,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Collections;
 
 import static org.mockito.Mockito.when;
 
@@ -18,8 +19,7 @@ public class TestBudgetService {
     public void sameDay(){
         BudgetService budgetService = new BudgetService();
 
-
-        when(budgetRepo.getAll()).thenReturn();
+        when(budgetRepo.getAll()).thenReturn(Collections.emptyList());
 
         budgetService.query(LocalDate.of(2020, 04, 01),
                             LocalDate.of(2020, 04, 01));
