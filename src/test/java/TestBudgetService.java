@@ -18,11 +18,12 @@ public class TestBudgetService {
 
 
     @Mock private IBudgetRepo budgetRepo;
-    private List<Budget> dbList = new LinkedList<>();
+    private List<Budget> dbList;
     BudgetService budgetService;
     @Before
     public void setup(){
         budgetService = new BudgetService();
+        dbList = new LinkedList<>();
 
     }
 
