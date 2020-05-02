@@ -22,7 +22,7 @@ public class TestBudgetService {
     BudgetService budgetService;
     @Before
     public void setup(){
-        budgetService = new BudgetService();
+        budgetService = new BudgetService(budgetRepo);
         dbList = new LinkedList<>();
 
     }
