@@ -7,7 +7,7 @@ import java.util.*;
 
 public class BudgetService {
 
-    private IBudgetRepo budgetRepo;
+    private final IBudgetRepo budgetRepo;
 
     public BudgetService(IBudgetRepo budgetRepo) {
         this.budgetRepo = budgetRepo;
@@ -26,14 +26,12 @@ public class BudgetService {
 
     public int query(LocalDate dateFrom, LocalDate dateTo) {
         Map<YearMonth, Integer> dailyBudgetByMonthTable = getDailyBudgetByMonthTable();
-        Map<YearMonth, Integer> effectiveDaysOfMonth = DateUtil.getDateList(dateFrom,dateTo);
+        Map<YearMonth, Integer> effectiveDaysOfMonth = DateUtil.getEffectiveDays(dateFrom,dateTo);
 
-        int totalBudget = 0;
-
-        for (Map.Entry<YearMonth, Integer> effectiveDays : effectiveDaysOfMonth.entrySet() ){
-            totalBudget += dailyBudgetByMonthTable.get(effectiveDays.getKey()) * effectiveDays.getValue();
-        }
-
-        return totalBudget;
+        return effectiveDaysOfMonth
+                .entrySet()
+                .stream()
+                .mapToInt(e -> dailyBudgetByMonthTable.get(e.getKey()) * e.getValue())
+                .sum();
     }
 }
