@@ -18,7 +18,7 @@ public class BudgetService {
         List<Budget> budgets = budgetRepo.getAll();
         DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyyMM");
         for (Budget budget: budgets){
-            YearMonth month = YearMonth.parse(budget.YearMonth,f);
+            YearMonth month = YearMonth.parse(budget.YearMonth, f);
             result.put(month, budget.amount/month.lengthOfMonth());
         }
         return result;
@@ -26,14 +26,14 @@ public class BudgetService {
 
     public int query(LocalDate dateFrom, LocalDate dateTo) {
         Map<YearMonth, Integer> dailyBudgetByMonthTable = getDailyBudgetByMonthTable();
-        Map<YearMonth, Long> daysByMonthTable = DateUtil.getDateList(dateFrom,dateTo);
+        Map<YearMonth, Integer> effectiveDaysOfMonth = DateUtil.getDateList(dateFrom,dateTo);
 
-        long totalBudget = 0L;
+        int totalBudget = 0;
 
-        for (Map.Entry daysByMonth : daysByMonthTable.entrySet() ){
-            totalBudget += dailyBudgetByMonthTable.get(daysByMonth.getKey()) * (long)daysByMonth.getValue();
+        for (Map.Entry<YearMonth, Integer> effectiveDays : effectiveDaysOfMonth.entrySet() ){
+            totalBudget += dailyBudgetByMonthTable.get(effectiveDays.getKey()) * effectiveDays.getValue();
         }
-        return (int)totalBudget;
-    }
 
+        return totalBudget;
+    }
 }

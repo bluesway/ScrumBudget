@@ -5,12 +5,18 @@ import java.time.YearMonth;
 import java.util.HashMap;
 
 public class DateUtil {
-    public static HashMap<YearMonth, Long> getDateList(LocalDate start, LocalDate end) {
-        HashMap<YearMonth, Long> map = new HashMap<>();
+    public static HashMap<YearMonth, Integer> getDateList(LocalDate start, LocalDate end) {
+        HashMap<YearMonth, Integer> map = new HashMap<>();
         for (LocalDate date = start; date.isBefore(end.plusDays(1)); date = date.plusDays(1)) {
             YearMonth key = YearMonth.of(date.getYear(), date.getMonthValue());
-            long current = map.getOrDefault(key, 0L);
-            map.put(key, current + 1);
+            if (key.equals(YearMonth.from(start)) || key.equals(YearMonth.from(end))) {
+                int current = map.getOrDefault(key, 0);
+                map.put(key, current + 1);
+            } else {
+                if (!map.containsKey(key)) {
+                    map.put(key, date.lengthOfMonth());
+                }
+            }
         }
 
         return map;
