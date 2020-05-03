@@ -1,37 +1,39 @@
-import utils.DateUtil;
+import model.LocalDateInclusivePeriod;
 
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
 
+/**
+ * Simple Design Pattern
+ *
+ * 1. Pass tests -> fulfill the requirement
+ * 2. Present the intent from the code itself
+ * 3. Prevent the redundant codes
+ * 4. Pass the parameters as less as possible
+ * 5. Return the values as simple as possible
+ *
+ * Primitive Obsession
+ */
 public class BudgetService {
 
     private final IBudgetRepo budgetRepo;
+    private final BudgetManager budgetManager;
 
     public BudgetService(IBudgetRepo budgetRepo) {
         this.budgetRepo = budgetRepo;
+        this.budgetManager = new BudgetManager();
     }
 
-    private Map<YearMonth,Integer> getDailyBudgetByMonthTable(){
-        Map<YearMonth,Integer> result = new HashMap<>();
-        List<Budget> budgets = budgetRepo.getAll();
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyyMM");
-        for (Budget budget: budgets){
-            YearMonth month = YearMonth.parse(budget.YearMonth, f);
-            result.put(month, budget.amount/month.lengthOfMonth());
+    public double query(LocalDate dateFrom, LocalDate dateTo) {
+        // move this outside of the method if we need to reuse in the future
+        budgetManager.updateBudget(budgetRepo.getAll());
+
+        LocalDateInclusivePeriod period = LocalDateInclusivePeriod.between(dateFrom, dateTo);
+        if (period.isValidPeriod()) {
+            return budgetManager.updateQueryPeriod(period)
+                    .mapToDouble(entry -> entry.getValue().getEffectiveBudget())
+                    .sum();
         }
-        return result;
-    }
 
-    public int query(LocalDate dateFrom, LocalDate dateTo) {
-        Map<YearMonth, Integer> dailyBudgetByMonthTable = getDailyBudgetByMonthTable();
-        Map<YearMonth, Integer> effectiveDaysOfMonth = DateUtil.getEffectiveDays(dateFrom,dateTo);
-
-        return effectiveDaysOfMonth
-                .entrySet()
-                .stream()
-                .mapToInt(e -> dailyBudgetByMonthTable.get(e.getKey()) * e.getValue())
-                .sum();
+        return 0.0;
     }
 }

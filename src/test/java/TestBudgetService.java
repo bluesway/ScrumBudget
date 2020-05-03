@@ -1,3 +1,4 @@
+import model.Budget;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,27 +14,27 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestBudgetService {
-
-
-    @Mock private IBudgetRepo budgetRepo;
+    @Mock
+    private IBudgetRepo budgetRepo;
     private List<Budget> dbList;
     BudgetService budgetService;
+
     @Before
-    public void setup(){
+    public void setup() {
         budgetService = new BudgetService(budgetRepo);
         dbList = new LinkedList<>();
     }
 
-    private void normalMock(){
+    private void normalMock() {
         Budget b1 = new Budget();
-        b1.YearMonth = "202004";
-        b1.amount = 300;
+        b1.yearMonth = "202004";
+        b1.amount = 30;
         Budget b2 = new Budget();
-        b2.YearMonth = "202005";
+        b2.yearMonth = "202005";
         b2.amount = 310;
         Budget b3 = new Budget();
-        b3.YearMonth = "202006";
-        b3.amount = 300;
+        b3.yearMonth = "202006";
+        b3.amount = 3000;
         dbList.add(b1);
         dbList.add(b2);
         dbList.add(b3);
@@ -41,50 +42,87 @@ public class TestBudgetService {
     }
 
     @Test
-    public void sameDay(){
+    public void noBudget() {
         normalMock();
-        int result = budgetService.query(LocalDate.of(2020, 4, 1),
-                            LocalDate.of(2020, 4, 1));
-        Assert.assertEquals(10, result);
+        double result = budgetService.query(
+                LocalDate.of(2020, 2, 1),
+                LocalDate.of(2020, 3, 1));
+        budgetShouldBe(0, result);
     }
 
     @Test
-    public void sameMonth(){
+    public void sameDay() {
         normalMock();
-        int result = budgetService.query(LocalDate.of(2020, 4, 1),
-                            LocalDate.of(2020, 4, 15));
-        Assert.assertEquals(150, result);
+        double result = budgetService.query(
+                LocalDate.of(2020, 4, 1),
+                LocalDate.of(2020, 4, 1));
+        budgetShouldBe(1, result);
     }
 
     @Test
-    public void oneMonth(){
+    public void noBudgetCrossToBudget() {
         normalMock();
-        int result = budgetService.query(LocalDate.of(2020, 4, 1),
+        double result = budgetService.query(
+                LocalDate.of(2020, 3, 31),
+                LocalDate.of(2020, 4, 1));
+        budgetShouldBe(1, result);
+    }
+
+    @Test
+    public void noBudgetIncludeBudget() {
+        normalMock();
+        double result = budgetService.query(
+                LocalDate.of(2020, 3, 31),
+                LocalDate.of(2020, 7, 1));
+        budgetShouldBe(3340, result);
+    }
+
+    @Test
+    public void sameMonth() {
+        normalMock();
+        double result = budgetService.query(
+                LocalDate.of(2020, 4, 1),
+                LocalDate.of(2020, 4, 15));
+        budgetShouldBe(15, result);
+    }
+
+    @Test
+    public void oneMonth() {
+        normalMock();
+        double result = budgetService.query(
+                LocalDate.of(2020, 4, 1),
                 LocalDate.of(2020, 4, 30));
-        Assert.assertEquals(300, result);
+        budgetShouldBe(30, result);
     }
 
     @Test
-    public void crossTwoMonth(){
+    public void crossTwoMonth() {
         normalMock();
-        int result = budgetService.query(LocalDate.of(2020, 4, 1),
-                            LocalDate.of(2020, 5, 15));
-        Assert.assertEquals(450, result);
+        double result = budgetService.query(
+                LocalDate.of(2020, 4, 1),
+                LocalDate.of(2020, 5, 10));
+        budgetShouldBe(130, result);
     }
 
     @Test
-    public void crossThreeMonth(){
+    public void crossThreeMonth() {
         normalMock();
-        int result = budgetService.query(LocalDate.of(2020, 4, 1),
-                            LocalDate.of(2020, 6, 15));
-        Assert.assertEquals(760, result);
+        double result = budgetService.query(
+                LocalDate.of(2020, 4, 1),
+                LocalDate.of(2020, 6, 20));
+        budgetShouldBe(2340, result);
     }
 
     @Test
-    public void startDayGrtEndDay(){
+    public void startDayAfterEndDay() {
         normalMock();
-        int result = budgetService.query(LocalDate.of(2020, 4, 1),
+        double result = budgetService.query(
+                LocalDate.of(2020, 4, 1),
                 LocalDate.of(2020, 2, 15));
-        Assert.assertEquals(0, result);
+        budgetShouldBe(0, result);
+    }
+
+    private void budgetShouldBe(double expected, double actual) {
+        Assert.assertEquals(expected, actual, 0);
     }
 }
